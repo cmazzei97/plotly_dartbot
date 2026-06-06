@@ -1,12 +1,14 @@
-import numpy as np
+import math
 import plotly.graph_objects as go
 
 
 def draw_circle(radius, fig, color="black"):
-    theta = np.linspace(0, 2 * np.pi, 500)
+    precision = 100
+    steps = 2 * math.pi / precision
+    thetas = [i * steps for i in range(precision + 1)]
 
-    x = radius * np.cos(theta)
-    y = radius * np.sin(theta)
+    x = [radius * math.cos(theta) for theta in thetas]
+    y = [radius * math.sin(theta) for theta in thetas]
 
     fig.add_trace(
         go.Scatter(
@@ -20,10 +22,10 @@ def draw_circle(radius, fig, color="black"):
 
 
 def draw_segment(theta, fig, color="black"):
-    radius = np.linspace(16, 170, 2)
-    
-    x = radius * np.cos(theta)
-    y = radius * np.sin(theta)
+    radii = [16, 170]
+
+    x = [radius * math.cos(theta) for radius in radii]
+    y = [radius * math.sin(theta) for radius in radii]
 
     fig.add_trace(
         go.Scatter(
